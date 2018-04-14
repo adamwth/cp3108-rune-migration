@@ -1,3 +1,9 @@
+/**
+ * Changes made to lines 579 to 620.
+ * Added color(shape, r, g, b) function to lines 579 to 598
+ * Added color(shape, r, g, b, a) function to lines 600 to 620
+ */
+
 var viewport_size = 512; // This is the height of the viewport
 // while a curve is approximated by a polygon,
 // the side of the polygon will be no longer than maxArcLength pixels
@@ -570,20 +576,46 @@ function addColorFromHex(shape, hex) {
   return wrapper;
 }
 
-/** Added this color mixing function */
-function mixColor(shape, hex) {
+/**
+ * Function to add color to shape by specifying the red, green, blue value.
+ * Opacity is kept at default value of 1. (Full opacity)
+ * @param {*} shape The shape to add color to.
+ * @param {*} r The red value.
+ * @param {*} g The green value.
+ * @param {*} b The blue value.
+ */
+function color(shape, r, g, b) {
   var wrapper = new Shape();
   wrapper.addS(shape);
-  var hexColor = hexToColor(hex);
-  var shapeColor = shape.getColor();
-  // Take the average to get the new color
-  var newColor = [
-    (hexColor[0] + shapeColor[0]) / 2,
-    (hexColor[1] + shapeColor[1]) / 2,
-    (hexColor[2] + shapeColor[2]) / 2,
+  var color = [
+    r,
+    g,
+    b,
     1
   ]
-  wrapper.setColor(newColor);
+  wrapper.setColor(color);
+  return wrapper;
+}
+
+/**
+ * Function to add color to shape by specifying the red, green, blue, and alpha value.
+ * Alpha represents opaqueness and ranges from 0 (transparent) to 1 (opaque).
+ * @param {*} shape The shape to add color to.
+ * @param {*} r The red value.
+ * @param {*} g The green value.
+ * @param {*} b The blue value.
+ * @param {*} a The alpha value. 
+ */
+function color(shape, r, g, b, a) {
+  var wrapper = new Shape();
+  wrapper.addS(shape);
+  var color = [
+    r,
+    g,
+    b,
+    a
+  ]
+  wrapper.setColor(color);
   return wrapper;
 }
 
